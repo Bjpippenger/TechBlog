@@ -14,7 +14,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const database = process.env.DB_NAME || 'tech_blog';
 const password = process.env.DB_PASSWORD || '!z<DuiPi|0xUrF';
 
-const sequelize = new Sequelize(database, 'root', password, {
+const sequelize = new Sequelize('tech_blog', 'root', '!z<DuiPi|0xUrF', {
   host: 'localhost',
   dialect: 'mysql',
 });
