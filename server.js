@@ -11,6 +11,11 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+const sequelize = new Sequelize(database, 'root', '', {
+  host: 'localhost',
+  dialect: 'mysql',
+});
+
 const sess = {
   secret: 'Super secret secret',
   cookie: { maxAge: 36000 },
