@@ -1,7 +1,7 @@
 const dotenv = require('dotenv').config();
 const express = require('express');
 const routes = require('./controllers');
-const sequelize = require('./config/connection');
+const { Sequelize } = require('sequelize');
 const path = require('path');
 const helpers = require('./utils/helpers');
 const exphbs = require('express-handlebars');
@@ -11,7 +11,10 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const sequelize = new Sequelize(database, 'root', '', {
+const database = process.env.DB_NAME || 'tech_blog';
+const password = process.env.DB_PASSWORD || '!z<DuiPi|0xUrF';
+
+const sequelize = new Sequelize(database, 'root', password, {
   host: 'localhost',
   dialect: 'mysql',
 });
@@ -22,8 +25,8 @@ const sess = {
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize
-  })
+    db: sequelize,
+  }),
 };
 
 app.use(session(sess));
